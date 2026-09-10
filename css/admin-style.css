@@ -1,0 +1,112 @@
+/**
+ * Planning Center Integration - Admin Styles
+ * Modern, clean admin interface
+ */
+
+/* Fix WordPress notification messages - make text visible */
+.wrap .notice,
+.wrap .updated,
+.wrap .error {
+    background: white !important;
+    border-left: 4px solid #00a0d2 !important;
+    padding: 12px 15px !important;
+    margin: 20px 0 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+.wrap .updated {
+    border-left-color: #46b450 !important;
+}
+
+.wrap .error {
+    border-left-color: #dc3232 !important;
+}
+
+.wrap .notice p,
+.wrap .updated p,
+.wrap .error p {
+    color: #23282d !important;
+    margin: 0.5em 0 !important;
+    font-size: 14px !important;
+}
+
+/* Settings cards layout */
+.pc-settings-card {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 4px solid #007acc;
+    transition: all 0.2s ease;
+}
+
+.pc-settings-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* Modern card header */
+.pc-settings-card-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.pc-settings-card-header h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: #23282d;
+    font-weight: 600;
+}
+
+.pc-settings-card-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Legacy support for cards without header wrapper */
+.pc-settings-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #23282d;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 12px;
+}
+
+.pc-settings-card > p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Info boxes */
+.pc-info-box {
+    background: #e7f5fe;
+    border-left: 4px solid #0073aa;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.pc-info-box h4 {
+    margin: 0 0 8px 0;
+    color: #0073aa;
+    font-size: 15px;
+}
+
+.pc-info-box p {
+    margin: 0;
+    color: #23282d;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .pc-settings-card {
+        padding: 20px 15px;
+    }
+}

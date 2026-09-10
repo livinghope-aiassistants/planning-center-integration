@@ -1,0 +1,981 @@
+/* Planning Center Events Plugin Styles 
+ * Version: 1.2.9 - CAROUSEL ASPECT RATIO FIX
+ * Last Updated: November 3, 2025
+ * Changes: Removed conflicting padding-top rule causing 2306px carousel height
+ */
+
+/* Container with dynamic grid based on cards per row */
+.pc-events-container.pc-cards-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 340px)); /* ~20% smaller than ~425px */
+    gap: 25px;
+    margin: 40px auto;
+    max-width: 1600px;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0 20px;
+    justify-content: center; /* Center the grid */
+}
+
+.pc-events-container.pc-cards-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 450px)); /* ~20% smaller than ~560px */
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 1400px;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0 20px;
+    justify-content: center; /* Center the grid */
+}
+
+.pc-events-container.pc-cards-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin: 40px auto;
+    max-width: 1040px; /* 20% smaller than 1300px */
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0 20px;
+}
+
+/* ================================================
+   CAROUSEL MODE STYLES - v1.2.0 IMAGE-ONLY SIMPLIFIED
+   ================================================ */
+
+/* Carousel container wrapper */
+.pc-events-carousel-wrapper,
+.pc-groups-carousel-wrapper {
+    position: relative;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: fit-content; /* Prevent expansion - shrink to content size */
+}
+
+/* VERSION INDICATOR */
+.pc-events-carousel-wrapper::before {
+    content: "v1.2.9";
+    position: absolute;
+    top: -20px;
+    right: 0;
+    font-size: 10px;
+    color: #999;
+    font-family: monospace;
+    z-index: 1000;
+}
+
+/* Carousel container */
+.pc-events-container.pc-carousel,
+.pc-groups-container.pc-carousel {
+    display: flex;
+    overflow: hidden;
+    padding: 0;
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 800px; /* Match wrapper's usable width (900px - 100px padding) */
+    box-sizing: border-box;
+    margin: 0 auto; /* Center it */
+}
+
+/* Carousel track holds all cards */
+.pc-carousel-track,
+.pc-groups-carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s ease-in-out;
+    box-sizing: border-box;
+    /* Track auto-sizes to fit all cards */
+}
+
+/* Remove gap for 1-card layouts */
+.pc-events-container.pc-carousel-1 .pc-carousel-track,
+.pc-groups-container.pc-carousel-1 .pc-groups-carousel-track {
+    gap: 0;
+}
+
+/* ================================================
+   CARD LINK WRAPPER (makes entire card clickable)
+   ================================================ */
+
+.pc-event-card-link,
+.pc-group-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex-shrink: 0;
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: fit-content; /* Prevent expansion - shrink to content size */
+}
+
+/* Card sizing based on visible cards */
+.pc-events-container.pc-carousel-1 .pc-event-card-link,
+.pc-groups-container.pc-carousel-1 .pc-group-card-link {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+}
+
+.pc-events-container.pc-carousel-2 .pc-event-card-link,
+.pc-groups-container.pc-carousel-2 .pc-group-card-link {
+    min-width: calc((100% - 20px) / 2);
+    max-width: calc((100% - 20px) / 2);
+    width: calc((100% - 20px) / 2);
+}
+
+.pc-events-container.pc-carousel-3 .pc-event-card-link,
+.pc-groups-container.pc-carousel-3 .pc-group-card-link {
+    min-width: calc((100% - 40px) / 3);
+    max-width: calc((100% - 40px) / 3);
+    width: calc((100% - 40px) / 3);
+}
+
+/* Hover effect on link wrapper */
+.pc-event-card-link:hover,
+.pc-group-card-link:hover {
+    transform: translateY(-5px);
+}
+
+/* ================================================
+   CARD STYLING - 16:9 ASPECT RATIO IMAGE-ONLY
+   ================================================ */
+
+/* Events carousel cards */
+.pc-events-container.pc-carousel .pc-event-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    width: 100%;
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box;
+}
+
+/* Card hover effect */
+.pc-event-card-link:hover .pc-event-card {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Event image container - 16:9 aspect ratio - HIGH SPECIFICITY */
+.pc-events-container.pc-carousel .pc-event-image {
+    width: 100% !important;
+    max-width: 100% !important; /* Prevent overflow */
+    aspect-ratio: 16 / 9 !important; /* Modern, reliable approach */
+    min-height: 200px !important; /* Fallback for older browsers */
+    position: relative !important;
+    overflow: hidden !important;
+    background: #f5f5f5 !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+}
+
+/* Event image itself */
+.pc-events-container.pc-carousel .pc-event-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important; /* Override general max-width */
+    object-fit: cover !important; /* Fill container perfectly (1920x1080 images in 16:9 container) */
+    object-position: center !important;
+    border-radius: 0 !important; /* Override general border-radius */
+    transition: transform 0.3s ease !important; /* Smooth zoom transition */
+}
+
+/* Carousel image hover zoom effect */
+.pc-events-container.pc-carousel .pc-event-card-link:hover .pc-event-image img {
+    transform: scale(1.05) !important;
+}
+
+/* Carousel navigation arrows */
+.pc-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #007acc;
+    color: #007acc;
+    width: 45px; /* Reduced from 50px */
+    height: 45px; /* Reduced from 50px */
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px; /* Reduced from 24px */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+    user-select: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pc-carousel-nav:hover {
+    background: #007acc;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 122, 204, 0.3);
+}
+
+.pc-carousel-nav:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.pc-carousel-nav.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pc-carousel-prev {
+    left: 0;
+}
+
+.pc-carousel-next {
+    right: 0;
+}
+
+/* Carousel indicators (dots) */
+.pc-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Reduced from 10px */
+    margin-top: 20px; /* Reduced from 30px */
+}
+
+.pc-carousel-indicator {
+    width: 10px; /* Reduced from 12px */
+    height: 10px; /* Reduced from 12px */
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pc-carousel-indicator:hover {
+    background: #bbb;
+}
+
+.pc-carousel-indicator.active {
+    background: #007acc;
+    border-color: #007acc;
+    transform: scale(1.2);
+}
+
+/* Standard card layout (for 2-3 cards per row) */
+.pc-events-container.pc-cards-3 .pc-event-card,
+.pc-events-container.pc-cards-2 .pc-event-card,
+.pc-events-container.pc-carousel .pc-event-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Single column layout with alternating image positions */
+.pc-events-container.pc-cards-1 .pc-event-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.pc-events-container.pc-cards-1 .pc-event-card.pc-reverse {
+    flex-direction: row-reverse;
+}
+
+.pc-events-container.pc-cards-1 .pc-event-image {
+    width: 48%;
+    min-height: 550px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pc-events-container.pc-cards-1 .pc-event-content {
+    width: 55%;
+    padding: 40px;
+}
+
+.pc-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image styles */
+.pc-event-image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    background: transparent;
+    position: relative;
+    padding: 30px;
+    min-height: 450px;
+}
+
+.pc-event-image img {
+    max-width: calc(100% - 40px);
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+}
+
+.pc-event-card:hover .pc-event-image img {
+    transform: scale(1.05);
+}
+
+/* Content area */
+.pc-event-content {
+    padding: 14px; /* Reduced from 20px for more compact cards */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pc-event-badge {
+    display: inline-block;
+    background: #007acc;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px; /* Reduced from 12px */
+    width: fit-content;
+}
+
+.pc-event-title {
+    font-family: inherit;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #333333;
+    margin: 0 0 6px 0; /* Reduced from 8px */
+    line-height: 1.3;
+}
+
+/* Smaller title in carousel for compact view */
+.pc-events-container.pc-carousel .pc-event-title {
+    font-size: 1.25em;
+    margin: 0 0 6px 0;
+}
+
+.pc-event-date {
+    font-family: inherit;
+    font-size: 0.875em;
+    color: #666666;
+    margin-bottom: 6px; /* Reduced from 10px */
+    font-weight: 500;
+}
+
+.pc-event-description {
+    font-family: inherit;
+    font-size: 0.9375em;
+    line-height: 1.6;
+    color: #555555;
+    margin-bottom: 8px; /* Reduced from 15px */
+    /* Removed flex: 1 so description doesn't expand unnecessarily */
+}
+
+/* Smaller description in carousel */
+.pc-events-container.pc-carousel .pc-event-description {
+    font-size: 0.875em;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.pc-event-description p {
+    margin: 0 0 10px 0;
+    font-family: inherit;
+}
+
+.pc-event-description p:last-child {
+    margin-bottom: 0;
+}
+
+.pc-event-button {
+    margin-top: auto;
+    display: inline-block;
+    background: #007acc;
+    color: #ffffff !important;
+    padding: 10px 24px; /* Reduced from 12px 30px */
+    border-radius: 5px;
+    text-decoration: none !important;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9375em;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+/* Smaller button in carousel */
+.pc-events-container.pc-carousel .pc-event-button {
+    padding: 8px 20px; /* Reduced from 10px 24px */
+    font-size: 0.875em;
+}
+
+.pc-event-button:hover {
+    background: #005a9c;
+    transform: translateY(-2px);
+    text-decoration: none !important;
+    color: #ffffff !important;
+}
+
+.pc-event-button:active {
+    transform: translateY(0);
+}
+
+.pc-event-button:focus {
+    outline: none;
+    text-decoration: none !important;
+}
+
+.pc-event-location {
+    font-family: inherit;
+    font-size: 0.875em;
+    color: #666666;
+    margin-bottom: 6px; /* Reduced from 10px */
+    font-weight: 500;
+}
+
+/* Error and empty states */
+.pc-events-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+    margin: 20px 0;
+}
+
+.pc-events-empty {
+    background: #d1ecf1;
+    color: #0c5460;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #bee5eb;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .pc-events-container.pc-cards-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .pc-events-container.pc-cards-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .pc-events-container.pc-cards-1 .pc-event-image {
+        min-height: 250px;
+    }
+    
+    .pc-events-container.pc-cards-1 .pc-event-content {
+        padding: 30px;
+    }
+    
+    /* Carousel adjustments for tablet */
+    .pc-events-container.pc-carousel-3 .pc-event-card {
+        min-width: calc((100% - 20px) / 2); /* Updated for new gap */
+        max-width: calc((100% - 20px) / 2);
+    }
+}
+
+@media (max-width: 768px) {
+    /* All layouts become single column on mobile */
+    .pc-events-container.pc-cards-3,
+    .pc-events-container.pc-cards-2 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .pc-events-container.pc-cards-1 {
+        gap: 20px;
+    }
+    
+    .pc-events-container.pc-cards-3 .pc-event-card,
+    .pc-events-container.pc-cards-2 .pc-event-card {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Stack single-column cards on mobile */
+    .pc-events-container.pc-cards-1 .pc-event-card,
+    .pc-events-container.pc-cards-1 .pc-event-card.pc-reverse {
+        flex-direction: column;
+    }
+    
+    .pc-events-container.pc-cards-1 .pc-event-image {
+        width: 100%;
+        min-height: 200px;
+    }
+    
+    .pc-events-container.pc-cards-1 .pc-event-content {
+        width: 100%;
+        padding: 25px;
+    }
+    
+    .pc-event-title {
+        font-size: 1.375em;
+    }
+    
+    /* Carousel becomes single card on mobile */
+    .pc-events-carousel-wrapper {
+        padding: 0 50px;
+    }
+    
+    .pc-events-container.pc-carousel-2 .pc-event-card,
+    .pc-events-container.pc-carousel-3 .pc-event-card {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .pc-carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pc-event-content {
+        padding: 20px;
+    }
+    
+    .pc-events-container.pc-cards-1 .pc-event-content {
+        padding: 20px;
+    }
+    
+    .pc-event-title {
+        font-size: 20px;
+    }
+    
+    .pc-event-button {
+        display: block;
+        width: 100%;
+        padding: 14px;
+    }
+    
+    /* Smaller carousel navigation on mobile */
+    .pc-events-carousel-wrapper {
+        padding: 0 45px;
+    }
+    
+    .pc-carousel-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+/* Loading state */
+.pc-events-loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 16px;
+}
+
+.pc-events-loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% {
+        content: '.';
+    }
+    40% {
+        content: '..';
+    }
+    60%, 100% {
+        content: '...';
+    }
+}
+
+/* ================================================
+   PLANNING CENTER GROUPS STYLES
+   ================================================ */
+
+/* Groups Container - Responsive Grid */
+.pc-groups-container {
+    display: grid;
+    gap: 10px;
+    margin: 40px auto;
+    max-width: 1600px;
+    padding: 0 20px;
+}
+
+/* Cards per row settings */
+.pc-groups-container.cards-1 {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+}
+
+.pc-groups-container.cards-2 {
+    grid-template-columns: repeat(2, minmax(0, 400px)); /* Fixed max width to pack closer */
+    justify-content: center; /* Center the grid itself */
+}
+
+/* Cards fill their column naturally */
+.pc-groups-container.cards-2 .pc-group-card {
+    width: 100%;
+}
+
+.pc-groups-container.cards-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* ================================================
+   GROUPS CAROUSEL MODE STYLES - v1.2.0 IMAGE-ONLY SIMPLIFIED
+   ================================================ */
+
+/* Groups carousel cards */
+.pc-groups-container.pc-carousel .pc-group-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: block;
+    width: 100%;
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box;
+}
+
+/* Card hover effect */
+.pc-group-card-link:hover .pc-group-card {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Group image container - 16:9 aspect ratio with background-image - HIGH SPECIFICITY */
+.pc-groups-container.pc-carousel .pc-group-image {
+    width: 100% !important;
+    max-width: 100% !important; /* Prevent overflow */
+    aspect-ratio: 16 / 9 !important; /* Modern, reliable approach */
+    min-height: 200px !important; /* Fallback for older browsers */
+    padding-top: 0 !important; /* CRITICAL: Override general rule's padding-top: 56.25% that causes massive height */
+    background-size: cover !important; /* Fill container perfectly (1920x1080 images in 16:9 container) */
+    background-color: #f5f5f5 !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    position: relative !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    transition: transform 0.3s ease !important; /* Smooth zoom transition */
+}
+
+/* Groups carousel hover zoom effect */
+.pc-groups-container.pc-carousel .pc-group-card-link:hover .pc-group-image {
+    transform: scale(1.05) !important;
+}
+
+
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+    .pc-groups-container.cards-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Groups carousel adjustments for tablet */
+    .pc-groups-container.pc-carousel-3 .pc-group-card {
+        min-width: calc((100% - 20px) / 2); /* Updated for new gap */
+        max-width: calc((100% - 20px) / 2);
+    }
+}
+
+@media (max-width: 768px) {
+    .pc-groups-container.cards-2,
+    .pc-groups-container.cards-3 {
+        grid-template-columns: minmax(0, 400px); /* Single column, max 400px */
+        justify-content: center;
+    }
+    
+    .pc-groups-container {
+        gap: 10px;
+        padding: 0 15px;
+    }
+    
+    /* Cards fill their column naturally */
+    .pc-group-card {
+        width: 100%;
+    }
+    
+    /* Groups carousel becomes single card on mobile */
+    .pc-groups-carousel-wrapper {
+        padding: 0 50px;
+    }
+    
+    .pc-groups-container.pc-carousel-2 .pc-group-card,
+    .pc-groups-container.pc-carousel-3 .pc-group-card {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Smaller carousel navigation on mobile for groups */
+    .pc-groups-carousel-wrapper {
+        padding: 0 45px;
+    }
+}
+
+/* Individual Group Card */
+.pc-group-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pc-group-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Group Image - 16:9 aspect ratio - v1.9.16: Updated for img tags */
+.pc-group-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.pc-group-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.pc-group-image-placeholder {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pc-group-image-placeholder::after {
+    content: '📸';
+    font-size: 48px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+}
+
+/* Group Content Area */
+.pc-group-content {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* COMPACT STYLING FOR GROUPS CAROUSEL */
+.pc-groups-container.pc-carousel .pc-group-content {
+    padding: 18px; /* Reduced from 24px */
+    gap: 10px; /* Reduced from 12px */
+    max-height: 196px; /* Reduced by 30% from 280px */
+    overflow-y: auto; /* Allow scroll if content is too long */
+}
+
+/* Limit description height in carousel */
+.pc-groups-container.pc-carousel .pc-group-description {
+    font-size: 0.875em; /* Reduced from 0.95em */
+    line-height: 1.5;
+    margin: 6px 0 0 0;
+    max-height: 70px; /* Reduced by 30% from 100px */
+    overflow-y: auto; /* Allow scroll if too long */
+}
+
+.pc-group-title {
+    margin: 0 0 8px 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #2c3e50;
+}
+
+/* Smaller title in carousel */
+.pc-groups-container.pc-carousel .pc-group-title {
+    font-size: 1.25em; /* Reduced from 1.5em */
+    margin: 0 0 6px 0;
+}
+
+.pc-group-location,
+.pc-group-schedule {
+    margin: 0;
+    font-size: 0.95em;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.5;
+}
+
+/* Smaller metadata in carousel */
+.pc-groups-container.pc-carousel .pc-group-location,
+.pc-groups-container.pc-carousel .pc-group-schedule {
+    font-size: 0.85em; /* Reduced from 0.95em */
+}
+
+.pc-group-location .dashicons,
+.pc-group-schedule .dashicons {
+    color: #667eea;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Smaller icons in carousel */
+.pc-groups-container.pc-carousel .pc-group-location .dashicons,
+.pc-groups-container.pc-carousel .pc-group-schedule .dashicons {
+    font-size: 16px; /* Reduced from 18px */
+    width: 16px;
+    height: 16px;
+}
+
+.pc-group-description {
+    margin: 8px 0 0 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #666;
+    flex-grow: 1;
+}
+
+/* Group Footer with Button */
+.pc-group-footer {
+    padding: 0 24px 24px 24px;
+    margin-top: auto;
+}
+
+/* Smaller footer padding in carousel */
+.pc-groups-container.pc-carousel .pc-group-footer {
+    padding: 0 18px 18px 18px; /* Reduced from 24px */
+}
+
+.pc-group-button {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 24px;
+    background-color: #667eea;
+    color: #ffffff !important;
+    text-align: center;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Smaller button in carousel */
+.pc-groups-container.pc-carousel .pc-group-button {
+    padding: 10px 20px; /* Reduced from 14px 24px */
+    font-size: 0.875em; /* Reduced from 1em */
+}
+
+.pc-group-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    opacity: 0.9;
+    text-decoration: none !important;
+}
+
+.pc-group-button:active {
+    transform: translateY(0);
+}
+
+/* Error and Empty States */
+.pc-no-groups,
+.pc-error {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.1em;
+    color: #666;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+.pc-error {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .pc-group-content {
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    .pc-group-title {
+        font-size: 1.3em;
+    }
+    
+    .pc-group-location,
+    .pc-group-schedule,
+    .pc-group-description {
+        font-size: 0.9em;
+    }
+    
+    .pc-group-footer {
+        padding: 0 20px 20px 20px;
+    }
+    
+    .pc-group-button {
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
+}
